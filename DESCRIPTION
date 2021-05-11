@@ -1,11 +1,32 @@
 Package: qpcrtools
 Type: Package
-Title: Tools for Analysis of RT-qPCR Data
+Title: Analysis and Visualization of RT-qPCR Data
 Version: 0.1.0
-Author: Ayush Noori
+Author: Ayush Noori, Zhaozhi Li, Colin Magdamo, Sudeshna Das
 Maintainer: Ayush Noori <anoori1@mgh.harvard.edu>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Tools for the analysis and visualization of real-time quantitative polymerase chain reaction (RT-qPCR) data in R.
+Depends:
+    data.table,
+    purrr,
+    magrittr,
+    stringr,
+    fs,
+    openxlsx,
+    ggplot2,
+    RColorBrewer,
+    ggpubr,
+    pheatmap
+Suggests:
+    moments,
+    psych,
+    ggtext,
+    ggsignif,
 License: MIT
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.1.1
+Collate: 
+    'qpcr-class.R'
+    'define-variables.R'
+    'qpcrtools-package.R'
+    'read-dct.R'
