@@ -26,7 +26,8 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 Collate: 
+    'calculate-ddct.R'
+    'calculate-rq.R'
     'qpcr-class.R'
-    'define-variables.R'
     'qpcrtools-package.R'
     'read-dct.R'

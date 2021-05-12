@@ -1,3 +1,7 @@
+#' @include calculate-ddct.R
+NULL
+
+#'
 #' @slot dCT A \code{data.table} containing dCT data.
 #' @slot ddCT A \code{data.table} containing ddCT data.
 #' @slot RQ A \code{data.table} containing RQ data.
@@ -19,11 +23,7 @@ qPCR <- setClass("qPCR",
 #'
 #' The qPCR class is the main class of the \code{qpcrtools} package and is designed to contain all relevant qPCR data objects.
 #'
-#' @param dCT A \code{data.table} containing dCT data.
-#' @param factors A character vector listing factors for statistical comparison corresponding to a subset of the columns of each \code{data.table} object.
-#' @param reference A character vector of the same length as factors, listing the level of each factor corresponding to the reference group.
-#' @param metadata Columns in the dCT \code{data.table} which are not genes, but are not relevant for comparison.
-#' @param genes A character vector listing genes corresponding to a subset of the columns of each \code{data.table} object.
+#' @inheritParams calculate_ddct
 #' @examples
 #' \dontrun{qPCR(factors = c("Genotype", "Treatment"), reference = c("APOE3", "PBS"), metadata = c("Mouse", "Sex"))}
 #' @author Ayush Noori
@@ -35,21 +35,11 @@ qPCR = function(dCT, factors, reference, metadata = NULL, genes = NULL) {
   # default gene assignment
   if(is.null(genes)) genes = dCT[, !c(..metadata, ..factors)] %>% colnames()
 
-  # create expression to subset reference group
-  create_ref = function(a, b) { paste0("get('", a, "') == '", b, "'") }
-  ref = map2(factors, reference, create_ref) %>% paste(collapse = " & ")
-
-  # calculate average of reference group
-  ctrl = dCT[, map(.SD, ~mean(.x, na.rm = TRUE)), .SDcols = genes, by = factors] %>%
-    .[eval(str2expression(ref)), ..genes]
-
   # calculate ddCT
-  message("Calculating ddCT.")
-  my_ddCT = copy(dCT)[, (genes) := map2(.SD, ctrl, ~.x-.y), .SDcols = genes]
+  my_ddCT = calculate_ddct(dCT = dCT, factors = factors, reference = reference, genes = genes)
 
   # calculate RQ
-  message("Calculating relative quantification.")
-  my_RQ = copy(my_ddCT)[, (genes) := 2^-.SD, .SDcols = genes]
+  my_RQ = calculate_rq(ddCT = my_ddCT, genes = genes)
 
   # define new qPCR object
   my_qPCR = new("qPCR", dCT = dCT, ddCT = my_ddCT, RQ = my_RQ, genes = genes, factors = factors, reference = reference)

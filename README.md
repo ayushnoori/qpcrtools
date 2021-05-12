@@ -1,6 +1,6 @@
 # qpcrtools: Analysis and Visualization of RT-qPCR Data
 
-The `qpcrtools` package provides utilities for the analysis and visualization of real-time quantitative polymerase chain reaction (RT-qPCR) data. The S4 `qPCR` class is a streamlined representation of RT-qPCR data which is easily modifiable to suit future analyses.
+The `qpcrtools` package provides utilities for the analysis and visualization of real-time quantitative polymerase chain reaction (RT-qPCR) data. The S4 `qPCR` class is a streamlined representation of RT-qPCR data which is easily modifiable to suit future analyses. Please note that this package remains under development.
 
 ## Installation
 
