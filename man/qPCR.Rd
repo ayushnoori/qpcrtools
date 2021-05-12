@@ -4,54 +4,25 @@
 \alias{qPCR}
 \title{An S4 class to contain qPCR data.}
 \usage{
-qPCR(
-  dCT = data.table(),
-  ddCT = data.table(),
-  RQ = data.table(),
-  genes = colnames(dCT),
-  factors = character()
-)
-
-qPCR(
-  dCT = data.table(),
-  ddCT = data.table(),
-  RQ = data.table(),
-  genes = colnames(dCT),
-  factors = character()
-)
+qPCR(dCT, factors, reference, metadata = NULL, genes = NULL)
 }
 \arguments{
 \item{dCT}{A \code{data.table} containing dCT data.}
 
-\item{ddCT}{A \code{data.table} containing ddCT data.}
+\item{factors}{A character vector listing factors for statistical comparison corresponding to a subset of the columns of each \code{data.table} object.}
 
-\item{RQ}{A \code{data.table} containing RQ data.}
+\item{reference}{A character vector of the same length as factors, listing the level of each factor corresponding to the reference group.}
+
+\item{metadata}{Columns in the dCT \code{data.table} which are not genes, but are not relevant for comparison.}
 
 \item{genes}{A character vector listing genes corresponding to a subset of the columns of each \code{data.table} object.}
-
-\item{factors}{A character vector listing factors for statistical comparison corresponding to a subset of the columns of each \code{data.table} object.}
 }
 \description{
-An S4 class to contain qPCR data.
-
-An S4 class to contain qPCR data.
+The qPCR class is the main class of the \code{qpcrtools} package and is designed to contain all relevant qPCR data objects.
 }
-\section{Slots}{
-
-\describe{
-\item{\code{dCT}}{A \code{data.table} containing dCT data.}
-
-\item{\code{ddCT}}{A \code{data.table} containing ddCT data.}
-
-\item{\code{RQ}}{A \code{data.table} containing RQ data.}
-
-\item{\code{genes}}{A character vector listing genes corresponding to a subset of the columns of each \code{data.table} object.}
-
-\item{\code{factors}}{A character vector listing factors for statistical comparison corresponding to a subset of the columns of each \code{data.table} object.}
-}}
-
+\examples{
+\dontrun{qPCR(factors = c("Genotype", "Treatment"), reference = c("APOE3", "PBS"), metadata = c("Mouse", "Sex"))}
+}
 \author{
-Ayush Noori
-
 Ayush Noori
 }

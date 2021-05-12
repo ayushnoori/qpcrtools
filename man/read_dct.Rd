@@ -4,13 +4,15 @@
 \alias{read_dct}
 \title{Read dCT data.}
 \usage{
-read_dct(file, format = "csv", ...)
+read_dct(file, format = "csv", relevel = NULL, ...)
 }
 \arguments{
 \item{file}{File name of dCT data in working directory, or, alternatively, path to the qPCR data file.}
 
 \item{format}{Format of the data file to import. Either \code{"csv"} to specify comma-separated data,
 or the name or index of the sheet in the Excel workbook to read the data from.}
+
+\item{relevel}{Optional named list of character vectors, where names represent factors and each character vector represents the corresponding appropriate level.}
 
 \item{...}{Additional arguments to be passed to \code{data.table::fread()} or \code{openxlsx::read.xlsx()} as needed.}
 }
